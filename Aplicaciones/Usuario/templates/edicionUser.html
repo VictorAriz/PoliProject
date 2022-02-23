@@ -1,0 +1,44 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de Usuarios {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de Usuarios</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarUser/" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigo" name="txtCodigo" value="{{user.codigo}}" class="form-control" placeholder="Codigo"
+                            minlength="6" maxlength="6" readonly required>
+                    </div>
+                     <div class="form-group">
+                        <input type="text" id="txtName" name="txtName" value="{{user.name}}" class="form-control" placeholder="Nombres"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtLast_name" name="txtLast_name" value="{{user.last_name}}" class="form-control" placeholder="Apellidos"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtMail" name="txtMail" value="{{user.mail}}" class="form-control" placeholder="Gmail"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtUser_name" name="txtUser_name" value="{{user.user_name}}" class="form-control" placeholder="Nombre de Usuario"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numDocument" name="numDocument" value="{{user.document}}" class="form-control" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

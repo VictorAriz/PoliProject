@@ -1,0 +1,85 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de Usuarios {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Gestión de Usuarios</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarUser/" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo"
+                            minlength="6" maxlength="6" required>
+                    </div>
+                     <div class="form-group">
+                        <input type="text" id="txtName" name="txtName" class="form-control" placeholder="Nombres"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtLast_name" name="txtLast_name" class="form-control" placeholder="Apellidos"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtMail" name="txtMail" class="form-control" placeholder="Gmail"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtUser_name" name="txtUser_name" class="form-control" placeholder="Nombre de Usuario"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numDocument" name="numDocument" class="form-control" placeholder="Numero de Documento"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Usuarios</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Gmail</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Documento</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in users %}
+                    <tr>
+                        <td>{{c.codigo}}</td>
+                        <td>{{c.name}}</td>
+                        <td>{{c.last_name}}</td>
+                        <td>{{c.mail}}</td>
+                        <td>{{c.user_name}}</td>
+                        <td>{{c.document}}</td>
+                        <td><a href="edicionUser/{{c.codigo}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarUser/{{c.codigo}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
